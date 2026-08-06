@@ -27,8 +27,7 @@ public class Hooks {
         ConfigReader config = new ConfigReader();
 
         String browser = config.getProperty("browser");
-        boolean headless = Boolean.parseBoolean(
-                config.getProperty("headless"));
+        boolean headless = Boolean.parseBoolean(config.getProperty("headless"));
 
         DriverFactory.initializeDriver(browser, headless);
 
@@ -36,8 +35,7 @@ public class Hooks {
 
         driver = passdr.getDriver();
 
-        LoggerUtil.info(
-                "Starting Scenario: " + scenario.getName());
+        LoggerUtil.info("Starting Scenario: " + scenario.getName());
     }
 
     @After(order = 1)
@@ -46,8 +44,7 @@ public class Hooks {
         if (scenario.isFailed() && driver != null) {
 
             byte[] screenshot =
-                    ((TakesScreenshot) driver)
-                            .getScreenshotAs(OutputType.BYTES);
+                    ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
             scenario.attach(
                     screenshot,
