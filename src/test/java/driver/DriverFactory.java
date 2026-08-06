@@ -13,7 +13,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 
-   private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static void initializeDriver(String browser, boolean headless) {
 
@@ -71,5 +71,4 @@ public class DriverFactory {
             driver.remove();
         }
     }
-
 }
