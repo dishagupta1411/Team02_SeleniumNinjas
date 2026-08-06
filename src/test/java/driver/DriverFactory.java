@@ -1,83 +1,75 @@
 package driver;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 
-	private static final ThreadLocal<WebDriver> driver =	new ThreadLocal<>();
+   private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-	public static void initializeDriver(String browser, boolean headless){
+    public static void initializeDriver(String browser, boolean headless) {
 
-		WebDriver webDriver;
+        WebDriver webDriver;
 
-		switch(browser.toLowerCase()){
-		case "chrome":
+        if (browser.equalsIgnoreCase("chrome")) {
 
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			if(headless){
-				options.addArguments("--headless=new");
-			}
+            WebDriverManager.chromedriver().setup();
 
-			options.addArguments("--start-maximized");
-			options.addArguments("--disable-notifications");
-			webDriver = new ChromeDriver(options);
-			break;
+            ChromeOptions options = new ChromeOptions();
 
-		case "firefox":
+            if (headless) {
+                options.addArguments("--headless=new");
+            }
 
-			WebDriverManager.firefoxdriver().setup();
-			FirefoxOptions firefox = 	new FirefoxOptions();
+            webDriver = new ChromeDriver(options);
 
-			if(headless){
-				firefox.addArguments("--headless");
-			}
-			webDriver = new FirefoxDriver(firefox);
-			break;
+        } else if (browser.equalsIgnoreCase("firefox")) {
 
-		case "edge":
+            WebDriverManager.firefoxdriver().setup();
 
-			WebDriverManager.edgedriver().setup();
-			EdgeOptions edge =	new EdgeOptions();
+            FirefoxOptions options = new FirefoxOptions();
 
-			if(headless){
-				edge.addArguments("--headless=new");
-			}
-			webDriver = new EdgeDriver(edge);
-			break;
+            if (headless) {
+                options.addArguments("--headless");
+            }
 
+            webDriver = new FirefoxDriver(options);
 
-		default:
-			throw new IllegalArgumentException("Unsupported browser: "+browser);
+        } else if (browser.equalsIgnoreCase("safari")) {
 
-		}
+            // SafariDriver is provided by macOS/Safari.
+            webDriver = new SafariDriver();
 
-		webDriver.manage().deleteAllCookies();
-		webDriver.manage().window().maximize();
+        } else {
 
-		driver.set(webDriver);
+            throw new IllegalArgumentException(
+                    "Unsupported browser: " + browser);
+        }
 
-	}
-	
-	public static WebDriver getDriver(){
-		return driver.get();
-	}
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+        driver.set(webDriver);
+    }
 
-	public static void quitDriver(){
-		if(driver.get()!=null){
-			driver.get().quit();
-			driver.remove();
-		}
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
 
-	}
+    public static void quitDriver() {
+
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
+        }
+    }
 
 }
