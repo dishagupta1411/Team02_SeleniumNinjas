@@ -29,7 +29,7 @@ Then HTTP response should be less than 400
 @ui4
 Scenario: Application title is displayed
 When Admin enters the valid LMS app URL
-Then Admin should see "LMS - Learning Management System"
+Then Admin should see LMS - Learning Management System
 
 @ui5
 Scenario: Application Logo is displayed
@@ -44,7 +44,7 @@ Then Admin should see company name below the app name
 @ui7
 Scenario: Login instruction message is displayed
 When Admin enters the valid LMS app URL
-Then Admin should see "Please login to LMS application"
+Then Admin should see Please login to LMS application
 
 @ui8
 Scenario: Input field is displayed
@@ -59,32 +59,32 @@ Then Admin should see one dropdown
 @ui10
 Scenario: Text presence on the first field
 When Admin enters the valid LMS app URL
-Then Admin should see "User" in the first text field
+Then Admin should see User in the first text field
 
 @ui11
 Scenario: Text presence on the second field
 When Admin enters the valid LMS app URL
-Then Admin should see "Password" in the second text field
+Then Admin should see Password in the second text field
 
 @ui12
 Scenario: Asterisk is displayed for user field
 When Admin enters the valid LMS app URL
-Then Admin should see asterisk mark "*" next to text for user field
+Then Admin should see asterisk mark  next to text for user field
 
 @ui13
 Scenario: Asterisk is displayed for password field
 When Admin enters the valid LMS app URL
-Then Admin should see asterisk mark "*" next to password text
+Then Admin should see asterisk mark  next to password text
 
 @ui14
 Scenario: Placeholder presence in dropdown
 When Admin enters the valid LMS app URL
-Then Admin should see "select the role" placeholder in dropdown
+Then Admin should see select the role placeholder in dropdown
 
 @ui15
 Scenario: Dropdown options to select role
 When Admin enters the valid LMS app URL
-Then Admin should see "Admin", "staff", "student" options in dropdown
+Then Admin should see Admin, staff, student options in dropdown
 
 @ui16
 Scenario: Alignment of the login form
@@ -127,37 +127,37 @@ Then Admin should land on home page
 Scenario: Login with special character in username
 Given Admin is on login Page
 When Admin clicks login in button after entering special character in username
-Then Admin should see Error message "Invalid username and password Please try again"
+Then Admin should see Error message Invalid username and password Please try again
 
 @functional3
 Scenario: Login attempt with empty username
 Given Admin is on login Page
 When Admin enters only the password and selects a role
-Then Admin should see Error message "Please enter your user name"
+Then Admin should see Error message Please enter your user name
 
 @functional4 @negative
 Scenario: Login attempt with empty password
 Given Admin is on login Page
 When Admin enters only the username and selects a role
-Then Admin should see Error message "Please enter your password"
+Then Admin should see Error message Please enter your password
 
 @functional5 @negative
 Scenario: Login attempt with wrong password
 Given Admin is on login Page
 When Admin clicks login in button after entering valid username , role , wrong password
-Then Admin should see Error message "Invalid username and password Please try again"
+Then Admin should see Error message Invalid username and password Please try again
 
 @functional6 @negative
 Scenario: Login attempt without selecting any role
 Given Admin is on login Page
 When Admin enters valid username and password without selecting a role
-Then Admin should see Error Message "Please select your role"
+Then Admin should see Error Message Please select your role
 
 @functional7 @negative
 Scenario: Login Attempt with invalid role
 Given Admin is on login Page
 When Admin clicks login button after entering valid username and password with an invalid role
-Then Admin should see Error Message "Please select correct role"
+Then Admin should see Error Message Please select correct role
 
 @functional8
 Scenario: Login Attempt using Keyboard
