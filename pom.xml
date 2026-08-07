@@ -17,6 +17,7 @@
 		<cucumber.version>7.34.6</cucumber.version>
 		<testng.version>7.12.0</testng.version>
 		<webdrivermanager.version>6.3.4</webdrivermanager.version>
+		<cucumber-picocontainer.version>7.15.0</cucumber-picocontainer.version>
 	</properties>
 
 	<dependencies>
@@ -56,6 +57,22 @@
 			<artifactId>webdrivermanager</artifactId>
 			<version>${webdrivermanager.version}</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.23.1</version>
+        </dependency>
+
+        <dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.23.1</version>
+</dependency>
+
+
+
+
 
 	</dependencies>
 
