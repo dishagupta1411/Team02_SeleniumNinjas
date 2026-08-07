@@ -1,30 +1,16 @@
 package pages;
 
-import java.time.Duration;
+import java.io.IOException;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driver.Passing_Driver;
 
-public class LoginPage {
+public class LoginPage extends CommonMethod {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    public LoginPage(Passing_Driver passdr) {
-
-        this.driver = passdr.getDriver();
-
-        PageFactory.initElements(driver, this);
-
-        this.wait = new WebDriverWait(
-                driver,
-                Duration.ofSeconds(15)
-        );
+    public LoginPage(Passing_Driver passdr) throws IOException {
+        super(passdr);
     }
 
     // ============================================================
