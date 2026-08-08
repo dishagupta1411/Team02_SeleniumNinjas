@@ -3,7 +3,6 @@ package pages;
 import java.io.IOException;
 import java.time.Duration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -35,22 +34,20 @@ public class CommonMethod {
         }
 
 
-	    this.actions = new Actions(driver);
-	    this.js = (JavascriptExecutor) driver;
-	    this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    this.config = new ConfigReader();
-	    PageFactory.initElements(driver, this);
-	}
+        this.actions = new Actions(driver);
+        this.js = (JavascriptExecutor) driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.config = new ConfigReader();
+
+        PageFactory.initElements(driver, this);
+    }
+
 
     public void navigateToApplication() {
         driver.get(config.getProperty("baseUrl"));
     }
     
-    protected void safeClick(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
-    }
-
-
+   
     protected void safeClick(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
@@ -74,6 +71,7 @@ public class CommonMethod {
         ).isDisplayed();
     }
 
+
 	protected boolean waitForUrlContains(String partialUrl) {
         try {
             return wait.until(ExpectedConditions.urlContains(partialUrl));
@@ -84,3 +82,5 @@ public class CommonMethod {
 
 	
 }
+
+
