@@ -34,13 +34,13 @@ public class CommonMethod {
             );
         }
 
-        this.actions = new Actions(driver);
-        this.js = (JavascriptExecutor) driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.config = new ConfigReader();
 
-        PageFactory.initElements(driver, this);
-    }
+	    this.actions = new Actions(driver);
+	    this.js = (JavascriptExecutor) driver;
+	    this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    this.config = new ConfigReader();
+	    PageFactory.initElements(driver, this);
+	}
 
     public void navigateToApplication() {
         driver.get(config.getProperty("baseUrl"));
@@ -49,6 +49,7 @@ public class CommonMethod {
     protected void safeClick(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
+
 
     protected void safeClick(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
@@ -59,6 +60,7 @@ public class CommonMethod {
         element.clear();
         element.sendKeys(text);
     }
+
 
     protected String getText(WebElement element) {
         return wait.until(
@@ -79,5 +81,6 @@ public class CommonMethod {
             return false;
         }
     }
+
 	
 }
