@@ -4,6 +4,7 @@ Feature: Batch Page Navigation and UI Validation
 
   Background:
     Given Admin is on home page after Login - Batch
+
 	@batchNav01
   Scenario: Batch page navigation
     When Admin clicks "Batch" on the navigation bar - Batch
