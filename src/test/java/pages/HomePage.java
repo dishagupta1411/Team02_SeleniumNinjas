@@ -5,23 +5,53 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage {
 	
-	 // =========== HOME PAGE ELEMENTS ============
+	// =========== HOME PAGE ELEMENTS ============
 
-    @FindBy(xpath = "//span[normalize-space()='LMS - Learning Management System']")
-    private WebElement applicationTitle;
+	@FindBy(xpath = "//span[normalize-space()='LMS - Learning Management System']")
+	private WebElement applicationTitle;
 
-    @FindBy(xpath = "//img[@src='assets/img/LMS-logo.jpg']")
-    private WebElement applicationLogo;
+	@FindBy(xpath = "//span[normalize-space()='Home']")
+	private WebElement homeButton;
 
-    // =========== HOME PAGE VERIFICATIONS ============
+	@FindBy(xpath = "//span[normalize-space()='Program']")
+	private WebElement programButton;
 
-    public boolean isApplicationTitleDisplayed() {
-        return applicationTitle.isDisplayed();
-    }
+	@FindBy(xpath = "//span[normalize-space()='Batch']")
+	private WebElement batchButton;
 
-    public boolean isApplicationLogoDisplayed() {
-        return applicationLogo.isDisplayed();
-    }
+	@FindBy(xpath = "//span[normalize-space()='Logout']")
+	private WebElement logoutButton;
+	
+	@FindBy(xpath = "//div[@class='box' and normalize-space()='Dashboard']")
+	private WebElement dashboardTitle;
+
+   
+
+	// =========== HOME PAGE VERIFICATIONS ============
+
+	public boolean isApplicationTitleDisplayed() {
+	    return applicationTitle.isDisplayed();
+	}
+
+	public boolean isHomeButtonDisplayed() {
+	    return homeButton.isDisplayed();
+	}
+
+	public boolean isProgramButtonDisplayed() {
+	    return programButton.isDisplayed();
+	}
+
+	public boolean isBatchButtonDisplayed() {
+	    return batchButton.isDisplayed();
+	}
+
+	public boolean isLogoutButtonDisplayed() {
+	    return logoutButton.isDisplayed();
+	}
+	
+	public boolean isDashboardDisplayed() {
+	    return dashboardTitle.isDisplayed();
+	}
     
 
 }

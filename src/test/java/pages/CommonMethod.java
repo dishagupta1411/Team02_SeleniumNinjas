@@ -14,6 +14,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driver.Passing_Driver;
 import utilities.ConfigReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import utilities.ExcelReaderFile;
 
 public class CommonMethod {
 
@@ -22,6 +25,7 @@ public class CommonMethod {
     protected JavascriptExecutor js;
     protected WebDriverWait wait;
     protected ConfigReader config;
+    protected ExcelReaderFile excelReader;
 
     public CommonMethod(Passing_Driver passdr) throws IOException {
 
@@ -37,6 +41,9 @@ public class CommonMethod {
         this.js = (JavascriptExecutor) driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.config = new ConfigReader();
+        String excelPath = config.getProperty("loginTestDataPath");
+        this.excelReader = new ExcelReaderFile(excelPath);
+
 
         PageFactory.initElements(driver, this);
     }
@@ -69,5 +76,33 @@ public class CommonMethod {
         return wait.until(
             ExpectedConditions.visibilityOf(element)
         ).isDisplayed();
+    }
+    
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+    public void navigateToInvalidApplication() {
+        driver.get(config.getProperty("baseUrl") + "invalid");
+    }
+    
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+    
+    public int getHttpResponseCode() {
+
+        try {
+            URL url = new URL(config.getProperty("baseUrl"));
+
+            HttpURLConnection connection =
+                    (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("GET");
+
+            return connection.getResponseCode();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to get HTTP response", e);
+        }
     }
 }

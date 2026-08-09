@@ -12,7 +12,7 @@ import io.cucumber.testng.CucumberOptions;
         "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
     },
     monochrome = false,
-    tags = "@ui1",
+    tags = "@functional9",
     features = "src/test/resources/features/login.feature",
     glue = {
         "stepDefinitions",

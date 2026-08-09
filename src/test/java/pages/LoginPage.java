@@ -4,10 +4,15 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import driver.Passing_Driver;
+import org.openqa.selenium.Keys;
+
 
 public class LoginPage extends CommonMethod {
+	
+	
 
     public LoginPage(Passing_Driver passdr) throws IOException {
         super(passdr);
@@ -25,6 +30,9 @@ public class LoginPage extends CommonMethod {
     @FindBy(xpath = "//p[normalize-space()='Please login to LMS application']")
     private WebElement loginInstruction;
 
+    //FOR HOME PAGE VERIFICATION
+    @FindBy(xpath = "//span[normalize-space()='LMS - Learning Management System']")
+    private WebElement applicationTitle;
 
     // ---------- Username ----------
 
@@ -105,7 +113,7 @@ public class LoginPage extends CommonMethod {
 
     // ---------- Logo / Instruction ----------
 
-    public boolean isApplicationLogoDisplayed() {
+    public boolean isApplicationBrandingDisplayed() {
         return applicationLogo.isDisplayed();
     }
 
@@ -115,6 +123,13 @@ public class LoginPage extends CommonMethod {
     
     public boolean areInputFieldsDisplayed() {
         return userName.isDisplayed() && password.isDisplayed();
+    }
+    
+    //FOR LANDING ON HOMEPAGE
+    public boolean isApplicationTitleDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOf(applicationTitle)
+        ).isDisplayed();
     }
 
 
@@ -129,6 +144,9 @@ public class LoginPage extends CommonMethod {
     }
 
     public String getUserNameErrorMessage() {
+
+        wait.until(ExpectedConditions.visibilityOf(userNameError));
+
         return userNameError.getText().trim();
     }
 
@@ -144,6 +162,9 @@ public class LoginPage extends CommonMethod {
     }
     
     public String getPasswordErrorMessage() {
+
+        wait.until(ExpectedConditions.visibilityOf(passwordError));
+
         return passwordError.getText().trim();
     }
     
@@ -158,12 +179,18 @@ public class LoginPage extends CommonMethod {
     }
 
     public boolean areRoleOptionsDisplayed() {
+
+        wait.until(ExpectedConditions.visibilityOf(adminOption));
+
         return adminOption.isDisplayed()
                 && staffOption.isDisplayed()
                 && studentOption.isDisplayed();
     }
     
     public String getRoleErrorMessage() {
+
+        wait.until(ExpectedConditions.visibilityOf(roleError));
+
         return roleError.getText().trim();
     }
     
@@ -255,6 +282,230 @@ public class LoginPage extends CommonMethod {
     }
     
     public void clickLoginButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
     }
+    
+   // private boolean applicationErrorReceived = false;
+    
+    public void navigateToInvalidApplication() {
+        driver.get(
+            "https://lms-frontend-6dcccb9dd0fa-invalid.herokuapp.com/"
+        );
+    }
+
+    public boolean isApplicationErrorReceived() {
+        return !"LMS".equals(driver.getTitle());
+    }
+    
+    
+    
+    //======== CHECKING FUNCTIONAL SCENARIOS ACTIONS =========
+ 
+    public void enterValidLoginDetails() throws IOException {
+
+        String username =
+                excelReader.getData("LoginData", "validLogin", "Username");
+
+        String passwordValue =
+                excelReader.getData("LoginData", "validLogin", "Password");
+
+        String role =
+                excelReader.getData("LoginData", "validLogin", "Role");
+
+        System.out.println("Username from Excel: " + username);
+        System.out.println("Password from Excel: " + passwordValue);
+        System.out.println("Role from Excel: " + role);
+
+        enterUsername(username);
+        enterPassword(passwordValue);
+        selectRole(role);
+
+        System.out.println(
+                "Username entered: " + userName.getAttribute("value")
+        );
+
+        System.out.println(
+                "Password entered: " + password.getAttribute("value")
+        );
+    }
+    
+
+    
+    public void enterSpecialCharacterUsernameDetails() throws IOException {
+
+        String username =
+                excelReader.getData("LoginData", "specialUsername", "Username");
+
+        String passwordValue =
+                excelReader.getData("LoginData", "specialUsername", "Password");
+
+        String role =
+                excelReader.getData("LoginData", "specialUsername", "Role");
+
+        enterUsername(username);
+        enterPassword(passwordValue);
+        selectRole(role);
+    }
+    
+
+    
+    public void enterPasswordAndSelectRole() throws IOException {
+
+        String passwordValue =
+                excelReader.getData("LoginData", "emptyUsername", "Password");
+
+        String role =
+                excelReader.getData("LoginData", "emptyUsername", "Role");
+
+        enterPassword(passwordValue);
+        selectRole(role);
+        clickLoginButton();
+    }
+    
+    public void enterUsernameAndSelectRole() throws IOException {
+
+        String username = excelReader.getData(
+                "LoginData",
+                "emptyPassword",
+                "Username"
+        );
+
+        String role = excelReader.getData(
+                "LoginData",
+                "emptyPassword",
+                "Role"
+        );
+
+        enterUsername(username);
+        selectRole(role);
+        clickLoginButton();
+    }
+    
+    public void enterValidUsernameRoleWrongPassword() throws IOException {
+
+        String username = excelReader.getData(
+                "LoginData",
+                "wrongPassword",
+                "Username"
+        );
+
+        String passwordValue = excelReader.getData(
+                "LoginData",
+                "wrongPassword",
+                "Password"
+        );
+
+        String role = excelReader.getData(
+                "LoginData",
+                "wrongPassword",
+                "Role"
+        );
+
+        enterUsername(username);
+        enterPassword(passwordValue);
+        selectRole(role);
+        clickLoginButton();
+    }
+    
+    public void enterValidUsernameAndPasswordWithoutRole() throws IOException {
+
+        String username = excelReader.getData(
+                "LoginData",
+                "noRole",
+                "Username"
+        );
+
+        String passwordValue = excelReader.getData(
+                "LoginData",
+                "noRole",
+                "Password"
+        );
+
+        enterUsername(username);
+        enterPassword(passwordValue);
+
+        // Intentionally do NOT select a role
+        clickLoginButton();
+    }
+    
+    public void enterValidUsernamePasswordInvalidRole() throws IOException {
+
+        String username = excelReader.getData(
+                "LoginData",
+                "invalidRole",
+                "Username"
+        );
+
+        String passwordValue = excelReader.getData(
+                "LoginData",
+                "invalidRole",
+                "Password"
+        );
+
+        String role = excelReader.getData(
+                "LoginData",
+                "invalidRole",
+                "Role"
+        );
+
+        enterUsername(username);
+        enterPassword(passwordValue);
+        selectRole(role);
+        clickLoginButton();
+    }
+    
+    public void enterValidLoginDetailsUsingKeyboard() throws IOException {
+
+        String username = excelReader.getData(
+                "LoginData", "validLogin", "Username");
+
+        String passwordValue = excelReader.getData(
+                "LoginData", "validLogin", "Password");
+
+        enterUsername(username);
+
+        actions.sendKeys(Keys.TAB)
+               .sendKeys(passwordValue)
+               .sendKeys(Keys.TAB)
+               .sendKeys(Keys.ENTER)
+               .perform();
+
+        // At this point role dropdown should have keyboard focus.
+        actions.sendKeys(Keys.ARROW_DOWN)
+        .sendKeys(Keys.ARROW_UP)
+        
+               .sendKeys(Keys.ENTER)
+               .perform();
+
+        // Move to Login button and submit using keyboard.
+        actions.sendKeys(Keys.TAB)
+               .sendKeys(Keys.ENTER)
+               .perform();
+    }
+    
+    public void clickLoginButtonUsingMouse() {
+
+        actions.moveToElement(loginButton)
+               .click()
+               .perform();
+    }
+    
+    public void enterValidLoginDetailsUsingMouse() throws IOException {
+
+        String username = excelReader.getData(
+                "LoginData", "validLogin", "Username");
+
+        String passwordValue = excelReader.getData(
+                "LoginData", "validLogin", "Password");
+
+        String role = excelReader.getData(
+                "LoginData", "validLogin", "Role");
+
+        enterUsername(username);
+        enterPassword(passwordValue);
+        selectRole(role);
+    }
+    
+         
 }
