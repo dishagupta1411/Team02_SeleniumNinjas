@@ -101,11 +101,7 @@ public class LoginPage extends CommonMethod {
     @FindBy(id = "login")
     private WebElement loginButton;
 
-//    @FindBy(xpath = "//span[contains(@class,'mat-button-wrapper') and normalize-space()='Login']")
-//    private WebElement loginButton;
-    
-    
-    
+
 
     // ============================================================
     // LOGIN PAGE VERIFICATIONS
@@ -124,6 +120,7 @@ public class LoginPage extends CommonMethod {
     public boolean areInputFieldsDisplayed() {
         return userName.isDisplayed() && password.isDisplayed();
     }
+    
     
     //FOR LANDING ON HOMEPAGE
     public boolean isApplicationTitleDisplayed() {
@@ -286,7 +283,6 @@ public class LoginPage extends CommonMethod {
         loginButton.click();
     }
     
-   // private boolean applicationErrorReceived = false;
     
     public void navigateToInvalidApplication() {
         driver.get(
@@ -302,6 +298,7 @@ public class LoginPage extends CommonMethod {
     
     //======== CHECKING FUNCTIONAL SCENARIOS ACTIONS =========
  
+    //Can be removed since we added a function in common method for login
     public void enterValidLoginDetails() throws IOException {
 
         String username =
@@ -321,13 +318,6 @@ public class LoginPage extends CommonMethod {
         enterPassword(passwordValue);
         selectRole(role);
 
-        System.out.println(
-                "Username entered: " + userName.getAttribute("value")
-        );
-
-        System.out.println(
-                "Password entered: " + password.getAttribute("value")
-        );
     }
     
 

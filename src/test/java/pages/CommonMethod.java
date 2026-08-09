@@ -105,4 +105,52 @@ public class CommonMethod {
             throw new RuntimeException("Unable to get HTTP response", e);
         }
     }
+    
+    public void loginAsAdmin() throws IOException {
+
+        String username =
+                excelReader.getData("LoginData", "validLogin", "Username");
+
+        String password =
+                excelReader.getData("LoginData", "validLogin", "Password");
+
+        String role =
+                excelReader.getData("LoginData", "validLogin", "Role");
+
+        // Username
+        WebElement usernameField =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        By.id("username")));
+
+        safeType(usernameField, username);
+
+        // Password
+        WebElement passwordField =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        By.id("password")));
+
+        safeType(passwordField, password);
+
+        // Role dropdown
+        WebElement roleDropdown =
+                wait.until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//mat-select[@formcontrolname='roleSelected']")));
+
+        safeClick(roleDropdown);
+
+        // Select role
+        WebElement roleOption =
+                wait.until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//span[contains(@class,'mat-option-text') and normalize-space()='"
+                                + role + "']")));
+
+        safeClick(roleOption);
+
+        // Login button
+        WebElement loginButton =
+                wait.until(ExpectedConditions.elementToBeClickable(
+                        By.id("login")));
+
+        safeClick(loginButton);
+    }
 }

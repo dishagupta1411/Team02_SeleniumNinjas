@@ -184,6 +184,19 @@ public class HomeStepDef {
     	        "Phone header is not displayed in the Staff Data table"
     	    );
     }
+    
+    @When("Admin clicks on the logout in the menu bar")
+    public void admin_clicks_on_the_logout_in_the_menu_bar() {
+    	homePage.clickLogout();
+    }
+
+    @Then("Admin should be redirected to the login page")
+    public void admin_should_be_redirected_to_the_login_page() {
+    	Assert.assertTrue(
+                homePage.isLoginPageDisplayed(),
+                "Admin was not redirected to the Login Page"
+        );
+    }
 
 
 	

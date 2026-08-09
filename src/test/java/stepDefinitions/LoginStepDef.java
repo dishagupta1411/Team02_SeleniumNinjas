@@ -220,9 +220,9 @@ public class LoginStepDef {
 
     @When("Admin clicks login in button after entering valid credentials")
     public void admin_clicks_login_in_button_after_entering_valid_credentials() throws IOException {
-
-        loginPage.enterValidLoginDetails();
-        loginPage.clickLoginButton();
+    	 loginPage.loginAsAdmin();
+       // loginPage.enterValidLoginDetails();
+       // loginPage.clickLoginButton();
        
     }
 

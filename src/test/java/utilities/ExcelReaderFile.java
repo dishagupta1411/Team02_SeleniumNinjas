@@ -16,9 +16,6 @@ public class ExcelReaderFile {
     public ExcelReaderFile(String xlfilePath) {
         this.xlfilePath = xlfilePath;
     }
-
-
-
     
     public String getData(String sheetName, String rowName, String columnName)
             throws IOException {
@@ -108,68 +105,3 @@ public class ExcelReaderFile {
 }
     
 
-
-
-
-//public int rowCount(String sheetName) throws IOException {
-//
-//  FileInputStream fis = new FileInputStream(xlfilePath);
-//  XSSFWorkbook wb = new XSSFWorkbook(fis);
-//
-//  XSSFSheet sheet = wb.getSheet(sheetName);
-//
-//  int rowCount = sheet.getLastRowNum();
-//
-//  wb.close();
-//  fis.close();
-//
-//  return rowCount;
-//}
-
-//public int colCount(String sheetName, int rowNum) throws IOException {
-//
-//  FileInputStream fis = new FileInputStream(xlfilePath);
-//  XSSFWorkbook wb = new XSSFWorkbook(fis);
-//
-//  XSSFSheet sheet = wb.getSheet(sheetName);
-//  XSSFRow row = sheet.getRow(rowNum);
-//
-//  int cellCount = row.getLastCellNum();
-//
-//  wb.close();
-//  fis.close();
-//
-//  return cellCount;
-//}
-
-
-
-
-/////USING INDEXES
-///
-//  public String getData(String sheetName, int rowNum, int columnNum)
-//  throws IOException {
-//
-//FileInputStream fis = new FileInputStream(xlfilePath);
-//XSSFWorkbook wb = new XSSFWorkbook(fis);
-//
-//XSSFSheet sheet = wb.getSheet(sheetName);
-//XSSFRow row = sheet.getRow(rowNum);
-//
-//String cellData = "";
-//
-//if (row != null) {
-//
-//  XSSFCell cell = row.getCell(columnNum);
-//
-//  if (cell != null) {
-//      DataFormatter formatter = new DataFormatter();
-//      cellData = formatter.formatCellValue(cell);
-//  }
-//}
-//
-//wb.close();
-//fis.close();
-//
-//return cellData;
-//}

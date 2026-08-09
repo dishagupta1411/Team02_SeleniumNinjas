@@ -104,6 +104,10 @@ public class HomePage extends CommonMethod {
 	public boolean isDashboardDisplayed() {
 	    return dashboardTitle.isDisplayed();
 	}
+	
+	public boolean isLoginPageDisplayed() {
+	    return driver.getCurrentUrl().contains("login");
+	}
     
 	public boolean isApplicationTitleAtTopLeft() {
 
@@ -250,6 +254,10 @@ public class HomePage extends CommonMethod {
 	public boolean isStaffTablePhoneHeaderDisplayed() {
 	    return staffTablePhoneHeader.isDisplayed()
 	            && staffTablePhoneHeader.getText().trim().equals("Phone");
+	}
+	
+	public void clickLogout() {
+	    safeClick(logoutButton);
 	}
 
 }
