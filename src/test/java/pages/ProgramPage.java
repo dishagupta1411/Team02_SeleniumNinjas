@@ -117,6 +117,8 @@ public class ProgramPage extends CommonMethod {
 	private WebElement enteredDescription;
 	@FindBy(xpath= "//button[@id='editProgram']")
 	private WebElement editButton;
+	@FindBy(xpath="//small[@class='p-invalid ng-star-inserted']")
+	private WebElement errorMsgUnderPname;
 	
 	
 	// Pagination frame locators
@@ -142,17 +144,9 @@ public class ProgramPage extends CommonMethod {
 			driver.get(config.getProperty("baseUrl"));
 		}
 	
-		public void addUserNameAndPassword() {
-			safeType(userName, "Lmshackathon@gmail.com");
-			safeType(password, "lmsAug@2026");			
-		}
-		
-		public void selectRole() {
-			safeClick(role);
-			safeClick(admin);
-		}
-		public void loginIntoApp() {		
-		safeClick(loginBtn);
+				
+		public void loginIntoApp() throws IOException {		
+		loginAsAdmin();
 	}
 		
 		public Boolean isDashboardDisplayed() {
@@ -163,9 +157,10 @@ public class ProgramPage extends CommonMethod {
 			safeClick(programBtn);
 		}
 		
-		public boolean isOnProgramPage() {
-			return waitForUrlContains("program");
-		}
+		public String isOnProgramPage() {
+			return manageProgram.getText();	}
+		
+		
 		
 		public String isAddNewProgramDisplayed() {
 			return getText(addNewProgram);
@@ -398,34 +393,30 @@ public class ProgramPage extends CommonMethod {
 			
 		}
 		
-		public void mandotaryFieldName() {
-			programNameTextBox.sendKeys("CypressLMSApplication");	
+		public void mandotaryFieldName() throws IOException {
+			programNameTextBox.sendKeys(excelReader.getData("Program", "CreateProgram", "Program Name"));
+			programDescTextBox.sendKeys(excelReader.getData("Program", "CreateProgram", "Program Description"));
+		 	safeClick(activeradiobutton);
 			
 		}
 		
-        public void FieldDescription() {
-			programDescTextBox.sendKeys("LMS application");
-		}
-
-        public void mandotaryFieldStatus() {
-        	safeClick(activeradiobutton);
-        	
-        	}
-        
         public void enterProgramNameInSearchBox(String programName) {
         	   getText(enteredProgramName);
         	   
         }
 
-        public String searchForProgram() {  	   
-        	searchBox.sendKeys("SitaLmsapp");
+        public String searchForProgram() throws IOException {  	   
+        	searchBox.sendKeys(excelReader.getData("Program", "Search Program Name", "Program Name"));
         	String searchText =	getText(enteredProgramName);
 	    	return searchText;
 	    		    	
 	    }
         
-        public String searchForProgramDescription() {  	   
-        	searchBox.sendKeys("SitaLmsapp");
+      
+        
+        
+        public String searchForProgramDescription() throws IOException {  	   
+        	searchBox.sendKeys(excelReader.getData("Program", "Search Program Description ", "Program Description"));
         	String searchText =	getText(enteredDescription);
 	    	return searchText;
 	    		    	
@@ -435,22 +426,31 @@ public class ProgramPage extends CommonMethod {
             clickOnButton(editButton);
         }
 
-        public void editProgramName() {
+        public void editProgramName() throws IOException {
             programNameTextBox.clear();
-            programNameTextBox.sendKeys("Javasaase");
+            programNameTextBox.sendKeys(excelReader.getData("Program", "Edit Program Name ", "Program Name"));
         }
 		
-        public void editProgramDescription() {
+        public void editProgramDescription() throws IOException {
             programDescTextBox.clear();
-            programDescTextBox.sendKeys("Javas app");
+            programDescTextBox.sendKeys(excelReader.getData("Program", "Edit Program Description ", "Program Description"));
         }
 		
-        public String searchForUpdatedProgram() {  	   
-        	searchBox.sendKeys("Javasaa");
+        public String searchForUpdatedProgram() throws IOException {  	   
+        	searchBox.sendKeys(excelReader.getData("Program", "Search Updated Program", "Program Name"));
         	String searchText =	getText(enteredProgramName);
 	    	return searchText;
 	    		    	
 	    }
+        
+        public void invalidProgramName() throws IOException {
+            programNameTextBox.clear();
+            programNameTextBox.sendKeys(excelReader.getData("Program", "Invalid Program Name ", "Program Name"));
+        }
+        
+        public String errorMsg() {
+        	return getText(errorMsgUnderPname);
+        }
         
    //---------------------------------------------------------------------------------------------     
         public boolean isNextButtonEnabled() {
@@ -461,20 +461,57 @@ public class ProgramPage extends CommonMethod {
             return !prevButton.getAttribute("class").contains("p-disabled");
         }
 
-        public void clickNextPage() {
+        public boolean isFirstButtonEnabled1() {
+            return !firstButton.getAttribute("class").contains("p-disabled");
+        }
+        
+        public boolean isFirstButtonEnabled() {
+
+            String className = firstButton.getAttribute("class");
+
+            System.out.println("FIRST button class: " + className);
+
+            return !className.contains("p-disabled");
+        }
+        
+        public void clickNextPage1() {
             if (isNextButtonEnabled()) {
            clickOnButton(nextButton);
             }
         }
+        
+        public void clickNextPage() {
 
-        public void clickPreviousPage() {
+            System.out.println("NEXT class BEFORE click: "
+                    + nextButton.getAttribute("class"));
+
+            System.out.println("NEXT enabled BEFORE click: "
+                    + isNextButtonEnabled());
+
+            if (isNextButtonEnabled()) {
+                clickOnButton(nextButton);
+            }
+        }
+
+        public void clickPreviousPage1() {
             if (isPrevButtonEnabled()) {
             	clickOnButton(prevButton);
             }
         }
+        public void clickPreviousPage() {
 
-        public void clickFirstPage() {
-           
+            System.out.println("PREVIOUS class BEFORE click: "
+                    + prevButton.getAttribute("class"));
+
+            System.out.println("PREVIOUS enabled BEFORE click: "
+                    + isPrevButtonEnabled());
+
+            if (isPrevButtonEnabled()) {
+                clickOnButton(prevButton);
+            }
+        }
+
+        public void clickFirstPage() {           
             clickOnButton(firstButton);
         }
 

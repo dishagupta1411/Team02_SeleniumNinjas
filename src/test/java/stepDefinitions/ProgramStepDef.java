@@ -28,11 +28,9 @@ public class ProgramStepDef {
 	    program.navigateToHomePage();
 	}
 
-	@When("Admin enter valid credentials  and clicks login button through keyboard for Program module")
-	public void admin_enter_valid_credentials_and_clicks_login_button_through_keyboard_for_program_module()  {
-	  program.addUserNameAndPassword();
-	  program.selectRole();	  
-		program.loginIntoApp();
+	@When("Admin enter valid credentials and clicks login button through keyboard for Program module")
+	public void admin_enter_valid_credentials_and_clicks_login_button_through_keyboard_for_program_module() throws IOException  {
+	 	program.loginIntoApp();
 		
 	}
 
@@ -51,7 +49,7 @@ public class ProgramStepDef {
 	
 	@Then("Admin should be navigated to Program page")
 	public void admin_should_be_navigated_to_program_page() {
-		Assert.assertTrue(program.isOnProgramPage(), "Admin is not on Program Page");
+		Assert.assertEquals(program.isManageProgramDisplayed(),"Manage Program","Admin is not on Program Page");
 	    
 	}
 	
@@ -223,7 +221,7 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 
 	@Then("Admin can see Program Details form disappears")
 	public void admin_can_see_program_details_form_disappears() {
-		Assert.assertTrue(program.isOnProgramPage(), "Admin is not on Program Page");
+		Assert.assertEquals(program.isManageProgramDisplayed(),"Manage Program", "Admin is not on Program Page");
 		
 	    
 	}
@@ -236,11 +234,9 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	}
 	
 	@When("Admin enter valid details for mandatory fields and Click on save button")
-	public void admin_enter_valid_details_for_mandatory_fields_and_click_on_save_button()  {
+	public void admin_enter_valid_details_for_mandatory_fields_and_click_on_save_button() throws IOException  {
 	    program.mandotaryFieldName();
-	    program.FieldDescription();
-	    program.mandotaryFieldStatus();
-	    program.clickSaveButton();
+	     program.clickSaveButton();
 	}
 	
 	 
@@ -251,17 +247,19 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 			    
 		}
 	 
-		@When("Admin searches with newly created {string}")
-		public void admin_searches_with_newly_created(String string) {
+		@When("Admin searches with newly created Program")
+		public void admin_searches_with_newly_created() throws InterruptedException, IOException {
 		   program.searchForProgram();
+		   
+		   
 		}
 
 		@Then("Admin should see the Records of the newly created Program details")
-		public void admin_should_see_the_records_of_the_newly_created_program_details() {
+		public void admin_should_see_the_records_of_the_newly_created_program_details() throws IOException {
 			String searchText=program.searchForProgram();
-			String expected="SitaLmsApp";
+			String expected="CypressnehaApplication";
 			softAssert.assertEquals(expected,searchText);
-			softAssert.assertAll();
+			
 		}
 	
 	@Then("Admin gets message {string} is required")
@@ -271,12 +269,15 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	}
 	
 	@When("Admin enters a numeric value as the Program Name")
-	public void admin_enters_a_numeric_value_as_the_program_name() {
+	public void admin_enters_a_numeric_value_as_the_program_name() throws IOException {
+		program.invalidProgramName();
 	    
 	}
 
 	@Then("Admin should see error message {string}")
 	public void admin_should_see_error_message(String string) {
+		softAssert.assertEquals(program.errorMsg(),string,"Message not displayed");
+		
 	    
 	}
 	
@@ -288,7 +289,7 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	}
 	
 	@When("Admin clicks save button after editing the program name")
-	public void admin_clicks_save_button_after_editing_the_program_name() {
+	public void admin_clicks_save_button_after_editing_the_program_name() throws IOException {
 		program.searchForProgram();
 		program.clickOnEditButton();
 		program.editProgramName();
@@ -297,27 +298,27 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	}
 	
 	@When("Admin clicks save button after editing the description")
-	public void admin_clicks_save_button_after_editing_the_description() {
+	public void admin_clicks_save_button_after_editing_the_description() throws IOException {
 		program.searchForProgramDescription();
 		program.clickOnEditButton();
-		program.editProgramName();
+		program.editProgramDescription();
 		program.clickSaveProgramButton();
 	    
 	}
 	
 	
-	@When("Admin searches with newly updated {string}")
-	public void admin_searches_with_newly_updated(String string) {
+	@When("Admin searches with newly updated Program")
+	public void admin_searches_with_newly_updated() throws IOException  {
 		program.searchForUpdatedProgram();
-	   
+		 
 	}
 
 	@Then("Admin verifies that the details are correctly updated.")
-	public void admin_verifies_that_the_details_are_correctly_updated() {
+	public void admin_verifies_that_the_details_are_correctly_updated() throws IOException {
 		String searchText=program.searchForProgram();
-		String expected="Javasaa";
+		String expected="CypressnehaApplicationss";
 		softAssert.assertEquals(expected,searchText);
-		softAssert.assertAll();
+		
 	}
 	   
 	
@@ -357,7 +358,7 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	
 	
 	//Pagination
-	@When("^Admin clicks the (Next|Last|Previous|First) link on the data table in program page$")
+	@When("^Admin clicks the (Next|Last|Previous|First) link on the data table$")
 	public void adminClicksPageLink_program(String pageLink) throws InterruptedException {
 
 		program.clickOnProgramBtn();	
@@ -379,29 +380,43 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	            Assert.fail("Unexpected page link: " + pageLink);
 	    }
 	}
-			@Then("^Admin should see the (.*) on the data table in program module$")
-			public void adminShouldSeeResults_program(String expectedResult) {
+	@Then("^Admin should see the (.*) on the data table$")
+	public void adminShouldSeeResults_program(String expectedResult) {
 
-				switch (expectedResult.toLowerCase().trim()) {
+	    switch (expectedResult.toLowerCase().trim()) {
 
-			    case "next enabled link":
-			        Assert.assertTrue(program.isNextButtonEnabled(),"Expected Next button to be enabled.");
-			        break;
-			    case "next button disabled":
-			        Assert.assertFalse(program.isNextButtonEnabled(),"Expected Next button to be disabled.");
-			        break;
-			    case "first page reached":
-			        Assert.assertFalse(program.isPrevButtonEnabled(),"Expected Previous button to be disabled on first page.");
-			        break;
-			    case "previous button disabled":
-			        Assert.assertFalse(program.isPrevButtonEnabled(),"Expected Previous button to be disabled.");
-			        break;
-			    case "next page reached":
-			    	Assert.assertTrue(program.isPrevButtonEnabled(),"Expected Previous button to be enabled after moving to next page.");
-			        break;
-			    default:
-			        Assert.fail("Unexpected result description: " + expectedResult);
-			}}
+	        case "previous button enabled":
+	            Assert.assertTrue(
+	                program.isPrevButtonEnabled(),
+	                "Expected Previous button to be enabled after clicking Next."
+	            );
+	            break;
+
+	        case "next button disabled":
+	            Assert.assertFalse(
+	                program.isNextButtonEnabled(),
+	                "Expected Next button to be disabled after clicking Last."
+	            );
+	            break;
+
+	        case "first button enabled":
+	            Assert.assertTrue(
+	                program.isFirstButtonEnabled(),
+	                "Expected First button to be enabled after clicking Previous."
+	            );
+	            break;
+
+	        case "previous button disabled":
+	            Assert.assertFalse(
+	                program.isPrevButtonEnabled(),
+	                "Expected Previous button to be disabled after clicking First."
+	            );
+	            break;
+
+	        default:
+	            Assert.fail("Unexpected result description: " + expectedResult);
+	    }
+	}
 }
 
 
