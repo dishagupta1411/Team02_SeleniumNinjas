@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -165,6 +166,23 @@ public class ProgramPage extends CommonMethod {
 	@FindBy(xpath="//span[text()='Showing 0 to 0 of 0 entries']")
 	private WebElement msgShowing0Entries;
 
+	//Sorting locators
+	// sort icons
+	@FindBy(xpath = "//thead//tr//th[2]//i")
+	private WebElement programNameSort;
+	@FindBy(xpath = "//thead//tr//th[3]//i")
+	private WebElement programDescriptionSort;
+	@FindBy(xpath = "//thead//tr//th[4]//i")
+	private WebElement programStatusSort;
+	// list
+	@FindBy(xpath = "//tbody//td[2]")
+	private List<WebElement> programNameList;
+	@FindBy(xpath = "//tbody//td[3]")
+	private List<WebElement> programDescriptionList;
+	@FindBy(xpath = "//tbody//td[4]")
+	private List<WebElement> programStatusList;
+	
+	
 
 	
 	
@@ -577,74 +595,97 @@ public class ProgramPage extends CommonMethod {
     	public String zeroEntriesMsg() {
     		return getText(msgShowing0Entries);
     	}
-   //---------------------------------------------------------------------------------------------     
-        public boolean isNextButtonEnabled() {
-            return !nextButton.getAttribute("class").contains("p-disabled");
-        }
+    	
+    	
+    	//--------------------------------------------------------------------------------------------
+    	
+    	public void clickProgramNameSort() {
+    	    clickSortArrow(programNameSort, programNameList);
+    	    clickSortArrow(programNameSort, programNameList);
+    	}
 
-        public boolean isPrevButtonEnabled() {
-            return !prevButton.getAttribute("class").contains("p-disabled");
-        }
+    	public void clickProgramNameSortDec() {
+    	    clickSortArrow(programNameSort, programNameList);
+    	    clickSortArrow(programNameSort, programNameList);
+    	    clickSortArrow(programNameSort, programNameList);
+    	}
 
-        public boolean isFirstButtonEnabled1() {
-            return !firstButton.getAttribute("class").contains("p-disabled");
-        }
-        
-        public boolean isFirstButtonEnabled() {
+    	public void clickProgramDescriptionSort() {
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	}
 
-            String className = firstButton.getAttribute("class");
+    	public void clickProgramDescriptionSortDec() {
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	}
 
-            System.out.println("FIRST button class: " + className);
+    	public void clickProgramStatusSort() {
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	}
 
-            return !className.contains("p-disabled");
-        }
-        
-        public void clickNextPage1() {
-            if (isNextButtonEnabled()) {
-           clickOnButton(nextButton);
-            }
-        }
-        
-        public void clickNextPage() {
+    	public void clickProgramStatusSortDec() {
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	}
 
-            System.out.println("NEXT class BEFORE click: "
-                    + nextButton.getAttribute("class"));
+    	private void clickSortArrow(WebElement sortArrow, List<WebElement> columnList) {
+    	    wait.until(ExpectedConditions.elementToBeClickable(sortArrow));
+    	    actions.click(sortArrow).perform();
+    	    wait.until(ExpectedConditions.visibilityOfAllElements(columnList));
+    	}
 
-            System.out.println("NEXT enabled BEFORE click: "
-                    + isNextButtonEnabled());
+    	public List<String> getOriginalList(String type) {
+    	    List<String> originalList = null;
 
-            if (isNextButtonEnabled()) {
-                clickOnButton(nextButton);
-            }
-        }
+    	    if (type.equals("ProgramName")) {
+    	        originalList = printWebElements(programNameList);
+    	    } else if (type.equals("Description")) {
+    	        originalList = printWebElements(programDescriptionList);
+    	    } else {
+    	        originalList = printWebElements(programStatusList);
+    	    }
+    	    return originalList;
+    	}
 
-        public void clickPreviousPage1() {
-            if (isPrevButtonEnabled()) {
-            	clickOnButton(prevButton);
-            }
-        }
-        public void clickPreviousPage() {
+    	public boolean isColumnSortedAscending(String type) {
+    	    List<String> actual = getOriginalList(type).stream()
+    	            .filter(s -> s != null && !s.trim().isEmpty())
+    	            .collect(Collectors.toList());
 
-            System.out.println("PREVIOUS class BEFORE click: "
-                    + prevButton.getAttribute("class"));
+    	    List<String> expected = new ArrayList<>(actual);
+    	    expected.sort(String.CASE_INSENSITIVE_ORDER);
 
-            System.out.println("PREVIOUS enabled BEFORE click: "
-                    + isPrevButtonEnabled());
+    	    return actual.equals(expected);
+    	}
 
-            if (isPrevButtonEnabled()) {
-                clickOnButton(prevButton);
-            }
-        }
+    	public boolean isColumnSortedDescending(String type) {
+    	    List<String> actual = getOriginalList(type).stream()
+    	            .filter(s -> s != null && !s.trim().isEmpty())
+    	            .collect(Collectors.toList());
 
-        public void clickFirstPage() {           
-            clickOnButton(firstButton);
-        }
+    	    List<String> expected = new ArrayList<>(actual);
+    	    expected.sort(String.CASE_INSENSITIVE_ORDER.reversed());
 
-        public void clickLastPage() {            
-            clickOnButton(lastButton);
-        }
+    	    return actual.equals(expected);
+    	}
 
-        public String getCurrentEntriesText() {
-            return currentEntriesText.getText().trim();
-}
+    	private List<String> printWebElements(List<WebElement> options) {
+    	    List<String> texts = new ArrayList<>();
+    	    for (WebElement option : options) {
+    	        texts.add(option.getText().trim());
+    	    }
+    	    return texts;
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+  
 }

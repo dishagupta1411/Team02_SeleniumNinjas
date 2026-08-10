@@ -409,97 +409,71 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	    
 	}
 	
+	//-----------------------------------------------------------------------------------------
 	
+		@When("Admin clicks on Arrow next to program Name")
+	public void admin_clicks_on_arrow_next_to_program_name() {
+		program.clickProgramNameSort();
+	}
+
+	@Then("Admin should See the Program Name is sorted in Ascending order")
+	public void admin_should_see_the_program_name_is_sorted_in_ascending_order() {
+		
+		Assert.assertTrue(program.isColumnSortedAscending("ProgramName"),"Program Name is NOT sorted in Ascending order");	    
+	}
+
+	@When("Admin clicks on Arrow next to program Name for Descending")
+	public void admin_clicks_on_arrow_next_to_program_name_for_descending() {
+		program.clickProgramNameSortDec();
+	   
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@Then("Admin should see {string} message")
-	public void admin_should_see_message(String string) {
+	@Then("Admin should See the Program Name is sorted in Descending order")
+	public void admin_should_see_the_program_name_is_sorted_in_descending_order() {
+		Assert.assertTrue(program.isColumnSortedDescending("ProgramName"),"Program Name is NOT sorted in Descending order");
 	    
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//Pagination
-	@When("^Admin clicks the (Next|Last|Previous|First) link on the data table$")
-	public void adminClicksPageLink_program(String pageLink) throws InterruptedException {
 
-		program.clickOnProgramBtn();	
-
-	    switch (pageLink.toLowerCase()) {
-	        case "next":
-	            program.clickNextPage();
-	            break;
-	        case "last":
-	            program.clickLastPage();
-	            break;
-	        case "previous":
-	            program.clickPreviousPage();
-	            break;
-	        case "first":
-	            program.clickFirstPage();
-	            break;
-	        default:
-	            Assert.fail("Unexpected page link: " + pageLink);
-	    }
+	@When("Admin clicks on Arrow next to Program Description")
+	public void admin_clicks_on_arrow_next_to_program_description() {
+	    program.clickProgramDescriptionSort();
 	}
-	@Then("^Admin should see the (.*) on the data table$")
-	public void adminShouldSeeResults_program(String expectedResult) {
 
-	    switch (expectedResult.toLowerCase().trim()) {
-
-	        case "previous button enabled":
-	            Assert.assertTrue(
-	                program.isPrevButtonEnabled(),
-	                "Expected Previous button to be enabled after clicking Next."
-	            );
-	            break;
-
-	        case "next button disabled":
-	            Assert.assertFalse(
-	                program.isNextButtonEnabled(),
-	                "Expected Next button to be disabled after clicking Last."
-	            );
-	            break;
-
-	        case "first button enabled":
-	            Assert.assertTrue(
-	                program.isFirstButtonEnabled(),
-	                "Expected First button to be enabled after clicking Previous."
-	            );
-	            break;
-
-	        case "previous button disabled":
-	            Assert.assertFalse(
-	                program.isPrevButtonEnabled(),
-	                "Expected Previous button to be disabled after clicking First."
-	            );
-	            break;
-
-	        default:
-	            Assert.fail("Unexpected result description: " + expectedResult);
-	    }
+	@Then("Admin should See the program Description is sorted in Ascending order")
+	public void admin_should_see_the_program_description_is_sorted_in_ascending_order() {
+		Assert.assertTrue(program.isColumnSortedAscending("Description"),"Program Description is NOT sorted in Ascending order");
+	    
 	}
+
+	@When("Admin clicks on Arrow next to Program Description for Descending")
+	public void admin_clicks_on_arrow_next_to_program_description_for_descending() {
+	   program.clickProgramDescriptionSortDec();
+	}
+
+	@Then("Admin should See the program Description is sorted in Descending order")
+	public void admin_should_see_the_program_description_is_sorted_in_descending_order() {
+		Assert.assertTrue(program.isColumnSortedDescending("Description"),"Program Status is NOT sorted in Descending order");
+	}
+
+	@When("Admin clicks on Arrow next to Program status")
+	public void admin_clicks_on_arrow_next_to_program_status() {
+	   program.clickProgramStatusSort();
+	}
+
+	@Then("Admin should see the Program status sorted in Ascending order")
+	public void admin_should_see_the_program_status_sorted_in_ascending_order() {
+		Assert.assertTrue(program.isColumnSortedAscending(""),"Program Status is NOT sorted in Ascending order");
+	    
+	}
+
+	@When("Admin clicks on Arrow next to Program status for Descending")
+	public void admin_clicks_on_arrow_next_to_program_status_for_descending() {
+	   program.clickProgramStatusSortDec();
+	}
+	
+	@Then("Admin should see the Program status sorted in Descending order")
+	public void admin_should_see_the_program_status_sorted_in_descending_order() {
+		Assert.assertTrue(program.isColumnSortedDescending(""),"Program Status is NOT sorted in Descending order");
+	}
+	
 }
-
-
