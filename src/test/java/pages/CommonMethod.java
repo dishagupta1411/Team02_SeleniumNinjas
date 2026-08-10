@@ -153,4 +153,15 @@ public class CommonMethod {
 
         safeClick(loginButton);
     }
+    
+    public void clickOnButton(WebElement element) {
+	    try {
+	         JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("arguments[0].click();", element);
+	    } catch (Exception e) {
+	        System.out.println("Failed to click element: " + e.getMessage());
+	    }
+	
+}
+    
 }
