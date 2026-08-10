@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-
+		
     private Properties properties;
 
     public ConfigReader() {
@@ -27,3 +27,4 @@ public class ConfigReader {
         return properties.getProperty(key);
     }
 }
+
