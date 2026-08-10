@@ -1,12 +1,16 @@
 package pages;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import driver.Passing_Driver;
 
@@ -120,7 +124,6 @@ public class ProgramPage extends CommonMethod {
 	@FindBy(xpath="//small[@class='p-invalid ng-star-inserted']")
 	private WebElement errorMsgUnderPname;
 	
-	
 	// Pagination frame locators
 	@FindBy(xpath = "//span[contains(@class, 'p-paginator-current')]")
 	private WebElement currentEntriesText;
@@ -132,7 +135,54 @@ public class ProgramPage extends CommonMethod {
 	private WebElement nextButton;
 	@FindBy(xpath = "//button[contains(@class, 'p-paginator-last')]")
 	private WebElement lastButton;
+	
+	// Deletion locators
+	@FindBy(xpath="//span[@class='p-button-icon pi pi-trash']")
+	private WebElement deleteBtn;
+	@FindBy(xpath = "//div[contains(@class,'p-dialog-header')]")
+	private WebElement deleteDialogBox;
+	@FindBy(xpath="//button[.//span[normalize-space()='Yes']]")
+	private WebElement confirmationDelete;
+	@FindBy(xpath = "//p-toastitem//*[contains(normalize-space(),'Program Deleted')]")
+	private WebElement successDeletionMessage;
+	// delete multiple program locators
+	@FindBy(xpath = "//div/mat-card/mat-card-content/p-table/div/div[1]/table/tbody/tr[1]/td[1]/p-tablecheckbox/div/div[2]")
+	private WebElement checkbox1;
+	@FindBy(xpath = "//div/mat-card/mat-card-content/p-table/div/div[1]/table/tbody/tr[3]/td[1]/p-tablecheckbox/div/div[2]")
+	private WebElement checkbox2;
+	@FindBy(xpath = "//div/mat-card/mat-card-title/div[2]/div[1]/button/span[1]")
+	private WebElement dubdelete_icon;
+	@FindBy(xpath = "//button//span[text()='Yes']")
+	private WebElement dubdelete_yes;
+	@FindBy(xpath = "//div/p-toastitem/div/div/div/div[2]")
+	private WebElement success_dbdelete;
 
+	
+	//Search locators
+	@FindBy(xpath = "//tbody//td[2]")
+	List<WebElement> listOfProgramNames;
+	@FindBy(xpath = "//tbody//td[3]")
+	List<WebElement> listOfDescription;
+	@FindBy(xpath="//span[text()='Showing 0 to 0 of 0 entries']")
+	private WebElement msgShowing0Entries;
+
+	//Sorting locators
+	// sort icons
+	@FindBy(xpath = "//thead//tr//th[2]//i")
+	private WebElement programNameSort;
+	@FindBy(xpath = "//thead//tr//th[3]//i")
+	private WebElement programDescriptionSort;
+	@FindBy(xpath = "//thead//tr//th[4]//i")
+	private WebElement programStatusSort;
+	// list
+	@FindBy(xpath = "//tbody//td[2]")
+	private List<WebElement> programNameList;
+	@FindBy(xpath = "//tbody//td[3]")
+	private List<WebElement> programDescriptionList;
+	@FindBy(xpath = "//tbody//td[4]")
+	private List<WebElement> programStatusList;
+	
+	
 
 	
 	
@@ -452,6 +502,191 @@ public class ProgramPage extends CommonMethod {
         	return getText(errorMsgUnderPname);
         }
         
+        
+     //---------------------------------------------------------------------------------------
+        public void clickOnDeletionBtn() {
+        	clickOnButton(deleteBtn);
+        }
+        
+        public boolean isDeleteDialogBoxDisplayed() {
+        	return isDisplayed(deleteDialogBox);
+        }
+        
+        public void clickOnSearchBox() {
+        	clickOnButton(searchBox);
+        }
+        
+                    
+        public String getSuccessDeletionMessage() {
+            return successDeletionMessage.getText();
+        }
+        
+        public void clickXButton1() {
+            wait.until(ExpectedConditions.visibilityOf(xButton));
+
+            wait.until(driver -> {
+                try {
+                    return xButton.isDisplayed() && xButton.isEnabled();
+                } catch (Exception e) {
+                    return false;
+                }
+            });
+
+            new Actions(driver).moveToElement(xButton).pause(Duration.ofMillis(500)).click().perform();
+        }
+        
+        public void SelectCheckBoxes() {
+    		actions.doubleClick(checkbox1).perform();
+    		checkbox2.click();
+    		System.out.println("this function executed:");
+
+    	}
+
+    	public void MultipleDelete() {
+    		wait.until(ExpectedConditions.elementToBeClickable(dubdelete_icon)).click();
+
+    	}
+
+    	public void DeleteSuccess() {
+    		clickOnButton(dubdelete_yes);//.click();
+    		String text2;
+    		text2 = success_dbdelete.getText();
+    		System.out.println(text2);
+    	}
+    	
+    	public void multipleDeleteButtonEnabled() {
+    		dubdelete_icon.isEnabled();
+    	}
+    
+    //----------------------------------------------------------------------------------------------
+    	public void searhBoxValidation(String field, String value) throws InterruptedException {
+    		js.executeScript("arguments[0].click();", searchBox);
+    		//boolean found = false;
+    		switch (field) {
+    		case "Program Name":
+    			searchBox.sendKeys(value);
+    			logicForValidatingSearch(listOfProgramNames, value);
+    			break;
+    		case "Description":
+    			searchBox.sendKeys(value);
+    			logicForValidatingSearch(listOfDescription, value);
+    			break;
+    		 		}
+    	}
+
+    	public void logicForValidatingSearch(List<WebElement> searchedValues, String value) {
+    		boolean found = false;
+    		for (WebElement v : searchedValues) {
+    			if (v.getText().equalsIgnoreCase(value)) {
+    				System.out.println("Search is success for value: " + value);
+    				found = true;
+    				break;
+    			}  		}
+    		if (!found) {
+    			System.out.println("Search is not success for value: " + value);
+    		}
+    	}
+        
+    	
+    	public void invalidSearch() {
+    		searchBox.sendKeys("Dona");
+    	}
+    	
+    	public String zeroEntriesMsg() {
+    		return getText(msgShowing0Entries);
+    	}
+    	
+    	
+    	//--------------------------------------------------------------------------------------------
+    	
+    	public void clickProgramNameSort() {
+    	    clickSortArrow(programNameSort, programNameList);
+    	    clickSortArrow(programNameSort, programNameList);
+    	}
+
+    	public void clickProgramNameSortDec() {
+    	    clickSortArrow(programNameSort, programNameList);
+    	    clickSortArrow(programNameSort, programNameList);
+    	    clickSortArrow(programNameSort, programNameList);
+    	}
+
+    	public void clickProgramDescriptionSort() {
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	}
+
+    	public void clickProgramDescriptionSortDec() {
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	    clickSortArrow(programDescriptionSort, programDescriptionList);
+    	}
+
+    	public void clickProgramStatusSort() {
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	}
+
+    	public void clickProgramStatusSortDec() {
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	    clickSortArrow(programStatusSort, programStatusList);
+    	}
+
+    	private void clickSortArrow(WebElement sortArrow, List<WebElement> columnList) {
+    	    wait.until(ExpectedConditions.elementToBeClickable(sortArrow));
+    	    actions.click(sortArrow).perform();
+    	    wait.until(ExpectedConditions.visibilityOfAllElements(columnList));
+    	}
+
+    	public List<String> getOriginalList(String type) {
+    	    List<String> originalList = null;
+
+    	    if (type.equals("ProgramName")) {
+    	        originalList = printWebElements(programNameList);
+    	    } else if (type.equals("Description")) {
+    	        originalList = printWebElements(programDescriptionList);
+    	    } else {
+    	        originalList = printWebElements(programStatusList);
+    	    }
+    	    return originalList;
+    	}
+
+    	public boolean isColumnSortedAscending(String type) {
+    	    List<String> actual = getOriginalList(type).stream()
+    	            .filter(s -> s != null && !s.trim().isEmpty())
+    	            .collect(Collectors.toList());
+
+    	    List<String> expected = new ArrayList<>(actual);
+    	    expected.sort(String.CASE_INSENSITIVE_ORDER);
+
+    	    return actual.equals(expected);
+    	}
+
+    	public boolean isColumnSortedDescending(String type) {
+    	    List<String> actual = getOriginalList(type).stream()
+    	            .filter(s -> s != null && !s.trim().isEmpty())
+    	            .collect(Collectors.toList());
+
+    	    List<String> expected = new ArrayList<>(actual);
+    	    expected.sort(String.CASE_INSENSITIVE_ORDER.reversed());
+
+    	    return actual.equals(expected);
+    	}
+
+    	private List<String> printWebElements(List<WebElement> options) {
+    	    List<String> texts = new ArrayList<>();
+    	    for (WebElement option : options) {
+    	        texts.add(option.getText().trim());
+    	    }
+    	    return texts;
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
    //---------------------------------------------------------------------------------------------     
         public boolean isNextButtonEnabled() {
             return !nextButton.getAttribute("class").contains("p-disabled");

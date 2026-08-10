@@ -229,7 +229,7 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	@When("Admin clicks X button")
 	public void admin_clicks_x_button() {
 		
-		program.clickXButton();
+		program.clickXButton1();
 	    
 	}
 	
@@ -320,14 +320,161 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 		softAssert.assertEquals(expected,searchText);
 		
 	}
+	
+
+	@When("Admin clicks on delete icon for a program")
+	public void admin_clicks_on_delete_icon_for_a_program() {
+		program.clickOnDeletionBtn();
+	    
+	}
+
+	@Then("Admin will get confirm deletion dialog box")
+	public void admin_will_get_confirm_deletion_dialog_box() {
+		Assert.assertTrue(program.isDeleteDialogBoxDisplayed(),"Program Deletion dialog should be displayed");
+	    
+	}
+	
+	
+	@Given("Admin is on Program Confirm Deletion Page after selecting a program to delete")
+	public void admin_is_on_program_confirm_deletion_page_after_selecting_a_program_to_delete() {
+		program.clickOnProgramBtn();
+		program.clickOnDeletionBtn();
+	    
+	}
+	
+	@Given("Admin is on Confirm deletion form")
+	public void admin_is_on_confirm_deletion_form() throws  InterruptedException {
+			program.clickOnProgramBtn();
+			program.clickOnDeletionBtn();
+	}
+
+	@When("Admin clicks on Yes button")
+	public void admin_clicks_on_button() {
+		//program.DeleteSuccess();
+	    
+	}
+
+	@Then("Admin can see {string} message")
+	public void admin_can_see_message(String string) {
+      //softAssert.assertEquals(program.getSuccessDeletionMessage(),string,"Message not found");
 	   
+	}
 	
+	@Then("Admin can see Confirm Deletion form disappear")
+	public void admin_can_see_confirm_deletion_form_disappear() {
+		Assert.assertEquals(program.isManageProgramDisplayed(),"Manage Program", "Admin is not on Program Page");
+	 }
 	
+	@Then("Mulitple delete box under manage program must be enabled")
+	public void mulitple_delete_box_under_manage_program_must_be_enabled() {
+	    program.multipleDeleteButtonEnabled();
+	}
 	
+	@When("Admin clicks on the multiple checkboxes on program module page")
+	public void admin_clicks_on_the_multiple_checkboxes_on_class_module_page() {
+	    program.SelectCheckBoxes();
+	}
+
+	@When("Admin clicks  on the left delete button on program module page")
+	public void admin_clicks_on_the_left_delete_button_on_class_module_page() {
+		program.MultipleDelete();
+	    
+	}
+
+	@Then("Admin able to delete multiple program by clicking yes to confirm")
+	public void admin_able_to_delete_multiple_class_by_clicking_yes_to_confirm() {
+		program.DeleteSuccess();
+	   
+	}
 	
+	@When("Admin enter the {string} {string} in search textbox")
+	public void admin_enter_the_in_search_textbox(String field, String value) throws InterruptedException {
+	    program.searhBoxValidation(field, value);
+	}
+
+	@Then("Admin should see Program details are searched by given fields")
+	public void admin_should_see_class_details_are_searched_by() {
+		
+	}
 	
+	@When("Admin enters the program that does not exist in search box")
+	public void admin_enters_the_program_that_does_not_exist_in_search_box() {
+		program.invalidSearch();
+	    
+	}
 	
+	@Then("There should see message {string} results.")
+	public void there_should_be_zero_results(String string) {
+		Assert.assertEquals(program.zeroEntriesMsg(), string,"More entries found");
+	    
+	}
 	
+	//-----------------------------------------------------------------------------------------
+	
+		@When("Admin clicks on Arrow next to program Name")
+	public void admin_clicks_on_arrow_next_to_program_name() {
+		program.clickProgramNameSort();
+	}
+
+	@Then("Admin should See the Program Name is sorted in Ascending order")
+	public void admin_should_see_the_program_name_is_sorted_in_ascending_order() {
+		
+		Assert.assertTrue(program.isColumnSortedAscending("ProgramName"),"Program Name is NOT sorted in Ascending order");	    
+	}
+
+	@When("Admin clicks on Arrow next to program Name for Descending")
+	public void admin_clicks_on_arrow_next_to_program_name_for_descending() {
+		program.clickProgramNameSortDec();
+	   
+	}
+	
+	@Then("Admin should See the Program Name is sorted in Descending order")
+	public void admin_should_see_the_program_name_is_sorted_in_descending_order() {
+		Assert.assertTrue(program.isColumnSortedDescending("ProgramName"),"Program Name is NOT sorted in Descending order");
+	    
+	}
+
+	@When("Admin clicks on Arrow next to Program Description")
+	public void admin_clicks_on_arrow_next_to_program_description() {
+	    program.clickProgramDescriptionSort();
+	}
+
+	@Then("Admin should See the program Description is sorted in Ascending order")
+	public void admin_should_see_the_program_description_is_sorted_in_ascending_order() {
+		Assert.assertTrue(program.isColumnSortedAscending("Description"),"Program Description is NOT sorted in Ascending order");
+	    
+	}
+
+	@When("Admin clicks on Arrow next to Program Description for Descending")
+	public void admin_clicks_on_arrow_next_to_program_description_for_descending() {
+	   program.clickProgramDescriptionSortDec();
+	}
+
+	@Then("Admin should See the program Description is sorted in Descending order")
+	public void admin_should_see_the_program_description_is_sorted_in_descending_order() {
+		Assert.assertTrue(program.isColumnSortedDescending("Description"),"Program Status is NOT sorted in Descending order");
+	}
+
+	@When("Admin clicks on Arrow next to Program status")
+	public void admin_clicks_on_arrow_next_to_program_status() {
+	   program.clickProgramStatusSort();
+	}
+
+	@Then("Admin should see the Program status sorted in Ascending order")
+	public void admin_should_see_the_program_status_sorted_in_ascending_order() {
+		Assert.assertTrue(program.isColumnSortedAscending(""),"Program Status is NOT sorted in Ascending order");
+	    
+	}
+
+	@When("Admin clicks on Arrow next to Program status for Descending")
+	public void admin_clicks_on_arrow_next_to_program_status_for_descending() {
+	   program.clickProgramStatusSortDec();
+	}
+	
+	@Then("Admin should see the Program status sorted in Descending order")
+	public void admin_should_see_the_program_status_sorted_in_descending_order() {
+		Assert.assertTrue(program.isColumnSortedDescending(""),"Program Status is NOT sorted in Descending order");
+	}
 	
 	
 	
@@ -418,5 +565,3 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 	    }
 	}
 }
-
-
