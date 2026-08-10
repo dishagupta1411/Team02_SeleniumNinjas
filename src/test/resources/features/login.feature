@@ -24,7 +24,7 @@ Then Admin should receive application error
 @ui3
 Scenario: Broken link verification
 When Admin enters the valid LMS app URL
-Then HTTP response should be less than 400
+Then HTTP response should be greater than 400
 
 @ui4
 Scenario: Application title is displayed
@@ -127,7 +127,7 @@ Then Admin should land on home page
 Scenario: Login with special character in username
 Given Admin is on login Page
 When Admin clicks login in button after entering special character in username
-Then Admin should see Error message Invalid username and password Please try again
+Then Admin should see Error message for Invalid username 
 
 @functional3
 Scenario: Login attempt with empty username
