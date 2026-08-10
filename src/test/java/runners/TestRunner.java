@@ -12,11 +12,11 @@ import io.cucumber.testng.CucumberOptions;
         "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
     },
     monochrome = false,
-    tags = "@ui1",
-    features = "src/test/resources/features/login.feature",
+    tags = "@Pagination",
+    features = "src/test/resources/features/03_02_AddNewProgram.feature",
     glue = {
         "stepDefinitions",
-        "hooks"
+                "hooks"
     }
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
