@@ -1,59 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="4" passed="2" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-08-07T16:38:01 MST" name="Default suite" finished-at="2026-08-07T16:38:11 MST" duration-ms="10479">
+  <suite started-at="2026-08-09T17:06:11 MST" name="Default suite" finished-at="2026-08-09T17:06:26 MST" duration-ms="14562">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@4c39bec8]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@e4487af]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-08-07T16:38:01 MST" name="Default test" finished-at="2026-08-07T16:38:11 MST" duration-ms="10479">
+    <test started-at="2026-08-09T17:06:11 MST" name="Default test" finished-at="2026-08-09T17:06:26 MST" duration-ms="14562">
       <class name="runners.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runners.TestRunner@4c39bec8]" started-at="2026-08-07T16:38:01 MST" name="setUpClass" finished-at="2026-08-07T16:38:01 MST" duration-ms="457" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runners.TestRunner@e4487af]" started-at="2026-08-09T17:06:11 MST" name="setUpClass" finished-at="2026-08-09T17:06:12 MST" duration-ms="451" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@1b70203f]]>
+                <![CDATA[org.testng.TestRunner@78d50a3c]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@4c39bec8]" started-at="2026-08-07T16:38:01 MST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-08-07T16:38:11 MST" duration-ms="9967" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@e4487af]" started-at="2026-08-09T17:06:12 MST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-08-09T17:06:24 MST" duration-ms="12424" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Column header name of data table"]]>
+                <![CDATA["Validate pagination links"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Program Module"]]>
+                <![CDATA["Add New Program Module"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@e4487af]" started-at="2026-08-09T17:06:12 MST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-08-09T17:06:25 MST" duration-ms="13190" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Validate pagination links"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Add New Program Module"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@e4487af]" started-at="2026-08-09T17:06:12 MST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-08-09T17:06:26 MST" duration-ms="13887" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Validate pagination links"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Add New Program Module"]]>
               </value>
             </param>
           </params>
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Lists differ at element [0]: Program Name  != Program Name expected [Program Name ] but found [Program Name]]]>
+              <![CDATA[Expected First button to be enabled after clicking Previous. expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Lists differ at element [0]: Program Name  != Program Name expected [Program Name ] but found [Program Name]
+              <![CDATA[java.lang.AssertionError: Expected First button to be enabled after clicking Previous. expected [true] but found [false]
 at org.testng.Assert.fail(Assert.java:111)
 at org.testng.Assert.failNotEquals(Assert.java:1590)
-at org.testng.Assert.assertEqualsImpl(Assert.java:150)
-at org.testng.Assert.assertEquals(Assert.java:1656)
-at org.testng.Assert.assertEquals(Assert.java:1618)
-at stepDefinitions.ProgramStepDef.admin_should_see_data_table_with_column_header_on_the_manage_program_page_as_program_name_program_description_program_status_edit_delete(ProgramStepDef.java:97)
-at ✽.Admin should see data table with column header on the Manage Program Page as Program Name, Program Description, Program Status, Edit/Delete(file:///C:/Users/gaurav.saini/git/Team02_SeleniumNinjas/src/test/resources/features/program.feature:13)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at stepDefinitions.ProgramStepDef.adminShouldSeeResults_program(ProgramStepDef.java:403)
+at ✽.Admin should see the first button enabled on the data table(file:///C:/Users/gaurav.saini/git/Team02_SeleniumNinjas/src/test/resources/features/03_02_AddNewProgram.feature:118)
 ]]>
             </full-stacktrace>
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runners.TestRunner@4c39bec8]" started-at="2026-08-07T16:38:11 MST" name="tearDownClass" finished-at="2026-08-07T16:38:11 MST" duration-ms="21" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@e4487af]" started-at="2026-08-09T17:06:12 MST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-08-09T17:06:26 MST" duration-ms="14066" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Validate pagination links"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Add New Program Module"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Expected Previous button to be enabled after clicking Next. expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Expected Previous button to be enabled after clicking Next. expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at stepDefinitions.ProgramStepDef.adminShouldSeeResults_program(ProgramStepDef.java:389)
+at ✽.Admin should see the previous button enabled on the data table(file:///C:/Users/gaurav.saini/git/Team02_SeleniumNinjas/src/test/resources/features/03_02_AddNewProgram.feature:118)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runners.TestRunner@e4487af]" started-at="2026-08-09T17:06:26 MST" name="tearDownClass" finished-at="2026-08-09T17:06:26 MST" duration-ms="15" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

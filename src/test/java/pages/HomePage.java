@@ -76,7 +76,10 @@ public class HomePage extends CommonMethod {
 	
 	@FindBy(xpath = "//app-staffdata//mat-header-cell[contains(@class,'mat-column-userPhoneNumber')]")
 	private WebElement staffTablePhoneHeader;
-
+	
+	//For Batch 
+	@FindBy(xpath = "//button/span[contains(text(),'Batch')]")
+    WebElement batchNavLink;
    
 
 	// =========== HOME PAGE VERIFICATIONS ============
@@ -259,5 +262,10 @@ public class HomePage extends CommonMethod {
 	public void clickLogout() {
 	    safeClick(logoutButton);
 	}
+	
+	//For Batch page
+	 public void clickBatchInNavBar() {
+	        safeClick(batchNavLink);
+	    }
 
 }

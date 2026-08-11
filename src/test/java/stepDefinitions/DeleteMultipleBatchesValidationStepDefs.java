@@ -19,7 +19,7 @@ public class DeleteMultipleBatchesValidationStepDefs {
 	}
 
 	@Given("Admin is on the Batch page for bulk deletion - Batch")
-	public void admin_is_on_the_batch_page_for_bulk_deletion_batch() {
+	public void admin_is_on_the_batch_page_for_bulk_deletion_batch() throws IOException {
 
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();

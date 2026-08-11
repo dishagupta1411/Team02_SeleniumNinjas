@@ -476,4 +476,92 @@ public void admin_should_see_data_table_with_column_header_on_the_manage_program
 		Assert.assertTrue(program.isColumnSortedDescending(""),"Program Status is NOT sorted in Descending order");
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Then("Admin should see {string} message")
+	public void admin_should_see_message(String string) {
+	    
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Pagination
+	@When("^Admin clicks the (Next|Last|Previous|First) link on the data table$")
+	public void adminClicksPageLink_program(String pageLink) throws InterruptedException {
+
+		program.clickOnProgramBtn();	
+
+	    switch (pageLink.toLowerCase()) {
+	        case "next":
+	            program.clickNextPage();
+	            break;
+	        case "last":
+	            program.clickLastPage();
+	            break;
+	        case "previous":
+	            program.clickPreviousPage();
+	            break;
+	        case "first":
+	            program.clickFirstPage();
+	            break;
+	        default:
+	            Assert.fail("Unexpected page link: " + pageLink);
+	    }
+	}
+	@Then("^Admin should see the (.*) on the data table$")
+	public void adminShouldSeeResults_program(String expectedResult) {
+
+	    switch (expectedResult.toLowerCase().trim()) {
+
+	        case "previous button enabled":
+	            Assert.assertTrue(
+	                program.isPrevButtonEnabled(),
+	                "Expected Previous button to be enabled after clicking Next."
+	            );
+	            break;
+
+	        case "next button disabled":
+	            Assert.assertFalse(
+	                program.isNextButtonEnabled(),
+	                "Expected Next button to be disabled after clicking Last."
+	            );
+	            break;
+
+	        case "first button enabled":
+	            Assert.assertTrue(
+	                program.isFirstButtonEnabled(),
+	                "Expected First button to be enabled after clicking Previous."
+	            );
+	            break;
+
+	        case "previous button disabled":
+	            Assert.assertFalse(
+	                program.isPrevButtonEnabled(),
+	                "Expected Previous button to be disabled after clicking First."
+	            );
+	            break;
+
+	        default:
+	            Assert.fail("Unexpected result description: " + expectedResult);
+	    }
+	}
 }

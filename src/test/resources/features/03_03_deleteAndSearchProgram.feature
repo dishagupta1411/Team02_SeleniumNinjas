@@ -60,3 +60,4 @@ Background: Admin is logged in to LMS Portal
     Given Admin is on Program page
     When Admin enters the program that does not exist in search box
     Then There should see message 'Showing 0 to 0 of 0 entries' results.
+

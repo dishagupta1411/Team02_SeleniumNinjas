@@ -22,7 +22,7 @@ public class BatchSortingStepDefs {
 	}
 
 	@Given("Admin is on the Batch page to sort - Batch")
-	public void admin_is_on_the_batch_page_to_sort_batch() {
+	public void admin_is_on_the_batch_page_to_sort_batch() throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();
 	}
@@ -39,7 +39,7 @@ public class BatchSortingStepDefs {
 	}
 
 	@Given("Admin is on the Batch page where {string} is sorted in ascending order - Batch")
-	public void admin_is_on_the_batch_page_where_is_sorted_in_ascending_order_batch(String column) {
+	public void admin_is_on_the_batch_page_where_is_sorted_in_ascending_order_batch(String column) throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();
 		batchPage.clickSortIconForColumn(column);

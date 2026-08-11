@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
@@ -43,10 +44,10 @@ public class DriverFactory {
 
             webDriver = new FirefoxDriver(options);
 
-        } else if (browser.equalsIgnoreCase("safari")) {
+        } else if (browser.equalsIgnoreCase("edge")) {
 
             // SafariDriver is provided by macOS/Safari.
-            webDriver = new SafariDriver();
+            webDriver = new EdgeDriver();
 
         } else {
 
@@ -72,4 +73,3 @@ public class DriverFactory {
         }
     }
 }
-

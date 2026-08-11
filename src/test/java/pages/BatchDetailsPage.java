@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -24,10 +23,10 @@ public class BatchDetailsPage extends CommonMethod {
 		batchPage = new BatchPage(passdr);
 	}
 
-	private ExcelReaderFile excelReader = new ExcelReaderFile(config.getProperty("testDataFilePath"));
+	//private ExcelReaderFile excelReader = new ExcelReaderFile(config.getProperty("loginTestDataPath"));
 
 	private String getBatchData(String testCaseName, String columnName) throws IOException {
-		return excelReader.getData(config.getProperty("testDataSheetName"), testCaseName, columnName);
+		return excelReader.getData("Batch", testCaseName, columnName);
 	}
 
 	// =========== BATCH DETAILS PAGE ELEMENTS ============

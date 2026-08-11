@@ -22,7 +22,7 @@ public class BatchNavigationAndUIStepDefs {
 	}
 
 	@Given("Admin is on home page after Login - Batch")
-	public void admin_is_on_home_page_after_login_batch() {
+	public void admin_is_on_home_page_after_login_batch() throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 	}
 
@@ -89,7 +89,7 @@ public class BatchNavigationAndUIStepDefs {
 
 	@When("Admin clicks on {string} under the {string} menu bar - Batch")
 	public void admin_clicks_on_under_the_menu_bar_batch(String string, String string2) {
-		homePage.clickBatchInNavBar();
+		//homePage.clickBatchInNavBar();
 		batchPage.clickAddNewBatchMenuItem();
 	}
 

@@ -22,7 +22,7 @@ public class DeleteBatchValidationStepDefs {
 	}
 
 	@Given("Admin is on the Batch page for batch deletion- Batch")
-	public void admin_is_on_the_batch_page_for_batch_deletion_batch() {
+	public void admin_is_on_the_batch_page_for_batch_deletion_batch() throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();
 	}

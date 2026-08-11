@@ -687,5 +687,74 @@ public class ProgramPage extends CommonMethod {
     	
     	
     	
-  
+   //---------------------------------------------------------------------------------------------     
+        public boolean isNextButtonEnabled() {
+            return !nextButton.getAttribute("class").contains("p-disabled");
+        }
+
+        public boolean isPrevButtonEnabled() {
+            return !prevButton.getAttribute("class").contains("p-disabled");
+        }
+
+        public boolean isFirstButtonEnabled1() {
+            return !firstButton.getAttribute("class").contains("p-disabled");
+        }
+        
+        public boolean isFirstButtonEnabled() {
+
+            String className = firstButton.getAttribute("class");
+
+            System.out.println("FIRST button class: " + className);
+
+            return !className.contains("p-disabled");
+        }
+        
+        public void clickNextPage1() {
+            if (isNextButtonEnabled()) {
+           clickOnButton(nextButton);
+            }
+        }
+        
+        public void clickNextPage() {
+
+            System.out.println("NEXT class BEFORE click: "
+                    + nextButton.getAttribute("class"));
+
+            System.out.println("NEXT enabled BEFORE click: "
+                    + isNextButtonEnabled());
+
+            if (isNextButtonEnabled()) {
+                clickOnButton(nextButton);
+            }
+        }
+
+        public void clickPreviousPage1() {
+            if (isPrevButtonEnabled()) {
+            	clickOnButton(prevButton);
+            }
+        }
+        public void clickPreviousPage() {
+
+            System.out.println("PREVIOUS class BEFORE click: "
+                    + prevButton.getAttribute("class"));
+
+            System.out.println("PREVIOUS enabled BEFORE click: "
+                    + isPrevButtonEnabled());
+
+            if (isPrevButtonEnabled()) {
+                clickOnButton(prevButton);
+            }
+        }
+
+        public void clickFirstPage() {           
+            clickOnButton(firstButton);
+        }
+
+        public void clickLastPage() {            
+            clickOnButton(lastButton);
+        }
+
+        public String getCurrentEntriesText() {
+            return currentEntriesText.getText().trim();
+}
 }

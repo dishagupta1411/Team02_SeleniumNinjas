@@ -22,7 +22,7 @@ public class AddNewBatchUIStepDefs {
 	}
 
 	@Given("Admin is on the Manage Batch page - Batch")
-	public void admin_is_on_the_manage_batch_page_batch() {
+	public void admin_is_on_the_manage_batch_page_batch() throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();
 

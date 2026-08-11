@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -106,15 +105,17 @@ public class BatchPage extends CommonMethod {
 	private WebElement nextButton;
 	@FindBy(xpath = "//button[contains(@class, 'p-paginator-last')]")
 	private WebElement lastButton;
+	
 
 	// =========== BATCH PAGE VERIFICATIONS ============
 
-	public void navigateToHomePageAfterLogin() {
+	public void navigateToHomePageAfterLogin() throws IOException {
 		navigateToApplication();
-		loginPage.enterUsername(config.getProperty("username"));
-		loginPage.enterPassword(config.getProperty("password"));
-		loginPage.selectRole("Admin");
-		loginPage.clickLoginButton();
+		loginAsAdmin();
+		//loginPage.enterUsername(config.getProperty("username"));
+		//loginPage.enterPassword(config.getProperty("password"));
+		//loginPage.selectRole("Admin");
+		//loginPage.clickLoginButton();
 	}
 
 	public void navigateToBatchPage() {
@@ -403,7 +404,7 @@ public class BatchPage extends CommonMethod {
 		clickOnButton(lastButton);
 	}
 
-	public void ensureNotOnLastPage() {
+	public void ensureNotOnLastPage() throws IOException {
 		navigateToHomePageAfterLogin();
 		navigateToBatchPage();
 
@@ -429,7 +430,7 @@ public class BatchPage extends CommonMethod {
 		return prevButton.getAttribute("disabled") != null && firstButton.getAttribute("disabled") != null;
 	}
 
-	public void navigateToPageExceptFirst() {
+	public void navigateToPageExceptFirst() throws IOException {
 		navigateToHomePageAfterLogin();
 		navigateToBatchPage();
 
@@ -451,7 +452,7 @@ public class BatchPage extends CommonMethod {
 		clickOnButton(firstButton);
 	}
 
-	public void verifyMultiplePagesExist() {
+	public void verifyMultiplePagesExist() throws IOException {
 		navigateToHomePageAfterLogin();
 		navigateToBatchPage();
 
@@ -677,5 +678,7 @@ public class BatchPage extends CommonMethod {
 			// toast not present - nothing to close
 		}
 	}
+	
+	
 
 }

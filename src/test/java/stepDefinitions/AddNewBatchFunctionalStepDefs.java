@@ -22,7 +22,7 @@ public class AddNewBatchFunctionalStepDefs {
 	}
 
 	@Given("Admin is on the Batch Details dialog box - Batch")
-	public void admin_is_on_the_batch_details_dialog_box_batch() {
+	public void admin_is_on_the_batch_details_dialog_box_batch() throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();
 		batchPage.clickAddNewBatchMenuItem();

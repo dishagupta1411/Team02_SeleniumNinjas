@@ -19,7 +19,7 @@ public class BatchPagePaginationStepDefs {
 	}
 
 	@Given("Admin is on the Batch page with multiple batch records - Batch")
-	public void admin_is_on_the_batch_page_with_multiple_batch_records_batch() {
+	public void admin_is_on_the_batch_page_with_multiple_batch_records_batch() throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();
 	}
@@ -35,7 +35,7 @@ public class BatchPagePaginationStepDefs {
 	}
 
 	@Given("Admin is on the Batch page except the last page - Batch")
-	public void admin_is_on_the_batch_page_except_the_last_page_batch() {
+	public void admin_is_on_the_batch_page_except_the_last_page_batch() throws IOException {
 		batchPage.ensureNotOnLastPage();
 	}
 
@@ -52,7 +52,7 @@ public class BatchPagePaginationStepDefs {
 	}
 
 	@Given("Admin is on the Batch table on any page except the first page - Batch")
-	public void admin_is_on_the_batch_table_on_any_page_except_the_first_page_batch() {
+	public void admin_is_on_the_batch_table_on_any_page_except_the_first_page_batch() throws IOException {
 		batchPage.navigateToPageExceptFirst();
 	}
 
@@ -67,7 +67,7 @@ public class BatchPagePaginationStepDefs {
 	}
 
 	@Given("Admin is on any page except the first page of Batch table - Batch")
-	public void admin_is_on_any_page_except_the_first_page_of_batch_table_batch() {
+	public void admin_is_on_any_page_except_the_first_page_of_batch_table_batch() throws IOException {
 		batchPage.navigateToPageExceptFirst();
 	}
 
@@ -82,7 +82,7 @@ public class BatchPagePaginationStepDefs {
 	}
 
 	@Given("Admin is on the Batch page with multiple pages of batch records - Batch")
-	public void admin_is_on_the_batch_page_with_multiple_pages_of_batch_records_batch() {
+	public void admin_is_on_the_batch_page_with_multiple_pages_of_batch_records_batch() throws IOException {
 		batchPage.verifyMultiplePagesExist();
 	}
 

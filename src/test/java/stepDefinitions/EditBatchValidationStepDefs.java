@@ -25,7 +25,7 @@ public class EditBatchValidationStepDefs {
 	}
 
 	@Given("Admin is on the Batch page - Batch")
-	public void admin_is_on_the_batch_page_batch() {
+	public void admin_is_on_the_batch_page_batch() throws IOException {
 		batchPage.navigateToHomePageAfterLogin();
 		batchPage.navigateToBatchPage();
 	}
