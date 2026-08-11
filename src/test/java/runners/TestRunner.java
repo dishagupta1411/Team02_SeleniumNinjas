@@ -12,8 +12,7 @@ import io.cucumber.testng.CucumberOptions;
         "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
     },
     monochrome = false,
-    tags = "@Pagination",
-    features = "classpath:features",
+    features = "src/test/resources/features",
     glue = {
         "stepDefinitions",
                 "hooks"
