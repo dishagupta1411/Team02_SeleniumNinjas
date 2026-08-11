@@ -9,15 +9,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.BatchPage;
+import pages.HomePage;
 
 public class BatchNavigationAndUIStepDefs {
-	
+
 	BatchPage batchPage;
-	
-    public BatchNavigationAndUIStepDefs(Passing_Driver passdr) throws IOException {
-        batchPage = new BatchPage(passdr);
-    }
-	
+	HomePage homePage;
+
+	public BatchNavigationAndUIStepDefs(Passing_Driver passdr) throws IOException {
+		batchPage = new BatchPage(passdr);
+		homePage = new HomePage(passdr);
+	}
+
 	@Given("Admin is on home page after Login - Batch")
 	public void admin_is_on_home_page_after_login_batch() {
 		batchPage.navigateToHomePageAfterLogin();
@@ -31,7 +34,7 @@ public class BatchNavigationAndUIStepDefs {
 	@Then("Admin should be in the Manage Batch Page - Batch")
 	public void admin_should_be_in_the_manage_batch_page_batch() {
 		Assert.assertTrue(batchPage.isOnManageBatchPage());
-	    
+
 	}
 
 	@Then("Admin should see sub menu in menu bar as {string} - Batch")
@@ -41,7 +44,7 @@ public class BatchNavigationAndUIStepDefs {
 
 	@Then("Admin should see the {string} Heading - Batch")
 	public void admin_should_see_the_heading_batch(String string) {
-		Assert.assertEquals(batchPage.getPageHeadingText(), string);   
+		Assert.assertEquals(batchPage.getPageHeadingText(), string);
 	}
 
 	@Then("Admin should see the disabled {string} under the header - Batch")
@@ -86,6 +89,7 @@ public class BatchNavigationAndUIStepDefs {
 
 	@When("Admin clicks on {string} under the {string} menu bar - Batch")
 	public void admin_clicks_on_under_the_menu_bar_batch(String string, String string2) {
+		homePage.clickBatchInNavBar();
 		batchPage.clickAddNewBatchMenuItem();
 	}
 
