@@ -13,7 +13,7 @@ import io.cucumber.testng.CucumberOptions;
     },
     monochrome = false,
     tags = "@Pagination",
-    features = "src/test/resources/features/03_02_AddNewProgram.feature",
+    features = "classpath:features",
     glue = {
         "stepDefinitions",
                 "hooks"
