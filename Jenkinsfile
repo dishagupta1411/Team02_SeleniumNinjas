@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     tools {
@@ -30,7 +29,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                bat 'mvn clean test'
             }
         }
     }
