@@ -18,10 +18,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginStepDef {
 
     private final LoginPage loginPage;
-    private WebDriver driver;
+   // private WebDriver driver;
 
     public LoginStepDef(Passing_Driver passdr) throws IOException {
-    	this.driver = passdr.getDriver();
+    	//this.driver = passdr.getDriver();
         this.loginPage = new LoginPage(passdr);
     }
     
