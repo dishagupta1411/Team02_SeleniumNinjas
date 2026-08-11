@@ -101,3 +101,4 @@ Feature: Program Module
     Given Admin is on home page after Login
     When Admin clicks Program on the navigation bar
     Then Admin should see the footer as "In total there are z programs".
+
